@@ -1,0 +1,1 @@
+Simple bash script for filtering text file containing strings, one per line, base on their length.
