@@ -49,7 +49,7 @@ Lines `12345` (5 chars) and `ad` (2 chars) were excluded, the rest matched lengt
 
 **Real-world example:**
 ```bash
-./simple.sh /usr/share/wordlists/rockyou.txt 6 rockyou_filtered.txt
+./filterxyz.sh /usr/share/wordlists/rockyou.txt 6 rockyou_filtered.txt
 ```
 
 ## Setup
