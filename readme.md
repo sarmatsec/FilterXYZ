@@ -23,7 +23,7 @@ asd3
 
 **Command:**
 ```bash
-./simple.sh example.txt 4 example_filtered.txt
+./filterxyz.sh example.txt 4 example_filtered.txt
 ```
 
 **Output file** `example_filtered.txt`:
@@ -35,10 +35,43 @@ asd3
 
 Lines `12345` (5 chars) and `ad` (2 chars) were excluded, the rest matched length 4.
 
+## Real-world case — TryHackMe + rockyou.txt
+
+THM gave a hint that the password is **4 characters long**. `rockyou.txt` has over 14 million entries — bruteforcing all of them is slow. FilterXYZ cuts it down instantly.
+
+```bash
+./filterxyz.sh /usr/share/wordlists/rockyou.txt 4 rockyou_filtered.txt
+```
+
+```
+File to process: /usr/share/wordlists/rockyou.txt
+The number is: 4
+Total lines:    14344392
+Input size:     134M
+----------------------------
+Completed: 10%
+...
+Completed: 100%
+----------------------------
+          RESULTS
+----------------------------
+Time elapsed:     266s
+Input lines:      14344392
+Matched lines:    18152
+Skipped lines:    14326240
+List reduction:   99%
+Input file size:  134M
+Output file size: 96K
+----------------------------
+Done — output saved to: rockyou_filtered.txt
+```
+
+**99% of the wordlist eliminated** — from 14 344 392 lines down to 18 152. Your bruteforce tool now has ~790x less work to do.
+
 ## Usage
 
 ```bash
-./simple.sh <input_file> <number> <output_file>
+./filterxyz.sh <input_file> <number> <output_file>
 ```
 
 | Argument | Description |
@@ -47,20 +80,15 @@ Lines `12345` (5 chars) and `ad` (2 chars) were excluded, the rest matched lengt
 | `number` | Target line length to filter by |
 | `output_file` | Path to write the filtered results |
 
-**Real-world example:**
-```bash
-./filterxyz.sh /usr/share/wordlists/rockyou.txt 6 rockyou_filtered.txt
-```
-
 ## Setup
 
 ```bash
-git clone https://github.com/sakamailsec/FilterXYZ.git
+git clone https://github.com/sarmatsec/FilterXYZ.git
 cd FilterXYZ
-chmod +x simple.sh
+chmod +x filterxyz.sh
 ```
 
 ## Requirements
 
 - Bash 4+
-- Unix-based OS (Linux / macOS)
+- Unix-based OS (Linux / macOS / Kali)
